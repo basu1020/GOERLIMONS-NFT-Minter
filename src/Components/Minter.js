@@ -1,33 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import MintedItems from './MintedItems'
 import GoerliThugs from '../contractjson.json'
+import userContext from './Context/userContext'
 
 const Minter = () => {
+  const context = useContext(userContext)
+  const { provider, signer, account, walletError, setWalletError } = context
   const [count, setCount] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [NFTArray, setNFTArray] = useState([])
+  
   const contractAddress = '0xf4ee808d9876868D7670AD998988b053a472E608'
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-  const signer = provider.getSigner()
-  const contract = new ethers.Contract(contractAddress, GoerliThugs.abi, signer)
+  const monContractAddress = ''
+  const contractGetter = new ethers.Contract(contractAddress, GoerliThugs.abi, provider)
+  const contractSetter = new ethers.Contract(contractAddress, GoerliThugs.abi, signer)
 
   const getCount = async () => {
-    const number = await contract.getCurrentTokenID()
+    const number = await contractGetter.getCurrentTokenID()
     setCount(parseInt(number))
   }
 
-  const contentId = 'QmTJ8AqFrAnG4vyCz1wuNWEhxVPGGJzsXcJWEiTAPa75Xh'
+  const thugsContentId = 'QmTJ8AqFrAnG4vyCz1wuNWEhxVPGGJzsXcJWEiTAPa75Xh' // folder ipfs address 
+  const monContentId = '' 
 
   const MintNFT = async () => {
     const upcomingId = count
-    const metadataURI = `${contentId}/${upcomingId}.json`
+    const metadataURI = `${upcomingId}.json`
 
-    const result = await contract.mint(metadataURI, {
-      value: ethers.utils.parseEther('0.0001'),
-    });
-
-    await result.wait()
-    getCount()
+    if (account) {
+      try {
+        const result = await contractSetter.mint(metadataURI, {
+          value: ethers.utils.parseEther('0.0001'),
+        });
+        await result.wait()
+        getCount()
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+    else{
+      setWalletError("Please connect the wallet first")
+    }
   }
 
   useEffect(() => {
@@ -36,22 +50,22 @@ const Minter = () => {
       let sampleArray = []
       const func = async () => {
         for (let i = 0; i < count; i++) {
-          let res = `ipfs://${contentId}/${i}.json`
-          let resOwner = await contract.ownerOf(i);
+          let res = `ipfs://${thugsContentId}/${i}.json`
+          let resOwner = await contractGetter.ownerOf(i);
           let obj = {
             id: i,
             name: String(res.name),
             desription: String(res.desription),
             owner: resOwner,
-            image: `https://gateway.pinata.cloud/ipfs/${contentId}/${i}.png`
+            image: `https://gateway.pinata.cloud/ipfs/${thugsContentId}/${i}.png`
           };
           sampleArray.push(obj);
         }
         setNFTArray(sampleArray)
+        setLoading(false)
       }
       func()
     }
-
   }, [count])
 
   return (
@@ -66,23 +80,28 @@ const Minter = () => {
           <img src="https://i.ibb.co/m6gNNsp/15.png" alt="15" border="0" />
         </div>
         <p>Address - {contractAddress}</p>
-        <p>Get your friendly neibhourhood THUG NOW!!</p>
+        <p>Get your friendly neibhourhood GoerliMons NOW!!</p>
         <p></p>
 
         {window.ethereum && <button onClick={MintNFT}>
           MINT FOR 0.0001 <i class="fa-brands fa-ethereum"></i>
         </button>}
-        {!window.ethereum && <button> INSTALL METAMASK </button>}
+        {walletError &&  <p style={{display: "inline-block", backgroundColor: "red", color:"white", borderRadius: "20px", marginTop:"10px"}}>{walletError}</p>}
+        {!window.ethereum &&
+        <a href='https://metamask.io/download/' target={"_blank"}>
+        <button> INSTALL METAMASK </button>
+        </a>}
         {count && <p>Total NFTs Minted - {count}/20</p>}
       </div>
 
       <div className="container">
-        <p onClick={() => { console.log(NFTArray) }}> List of THUGS minted with the addresses currently holding. </p>
-        <div className="minted-items">
+        { window.ethereum && <p> List of THUGS minted with the addresses currently holding. {loading ? "(loading...)" : ""} </p>}
+        {<div className="minted-items">
           {NFTArray.map((nft) => {
             return <MintedItems key={nft.id} props={nft} />
           })}
-        </div>
+        </div>}
+        {loading && <p>Loading .....</p>}
       </div>
     </>
   )

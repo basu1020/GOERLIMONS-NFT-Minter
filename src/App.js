@@ -1,13 +1,16 @@
 import './App.css';
 import Navbar from './Components/Navbar';
 import Minter from './Components/Minter';
+import UserState from './Components/Context/userState';
 
 function App() {
-  
+
   return (
     <>
-    <Navbar/>
-    <Minter/>
+      <UserState>
+        <Navbar />
+        <Minter />
+      </UserState>
     </>
   );
 }

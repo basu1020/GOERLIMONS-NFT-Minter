@@ -9,7 +9,6 @@ const MintedItems = ({props}) => {
             <img src={props.image} alt="" />
         </div>
         <div className="NFT-name">
-            <p></p>
             <p>{props.description}</p>
         </div>
         <div className="NFT-owner-address">

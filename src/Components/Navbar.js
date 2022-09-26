@@ -1,16 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import { ethers } from 'ethers'
-
+import React, { useContext } from 'react'
+import userContext from './Context/userContext'
 
 const Navbar = () => {
-    const [account, setAccount] = useState(null)
-
-    const onClickConnector = async () => {
-        const [acc] = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(acc)
-    }
+    const context = useContext(userContext)
+    const { account } = context
+    const { onClickConnector } = context
     
-
     return (
         <>
             <nav>
