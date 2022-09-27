@@ -14,6 +14,8 @@
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
     "@openzeppelin/contracts": "^4.7.3",
-    "dotenv": "^16.0.1"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "node-fetch": "^3.2.10"
   }
 }

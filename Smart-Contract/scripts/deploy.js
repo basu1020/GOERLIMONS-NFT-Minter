@@ -2,14 +2,13 @@ const hre = require("hardhat");
 
 async function main() {
 
-  const GoerliThugs = await hre.ethers.getContractFactory("MyNFT");
-  const goerliThugs = await GoerliThugs.deploy();
+  const GoerliMons = await hre.ethers.getContractFactory("GMON");
+  const goerliMons = await GoerliMons.deploy();
 
-  await goerliThugs.deployed();
+  await goerliMons.deployed();
 
-  console.log("My NFT deployed to:", goerliThugs.address);
+  console.log("My NFT deployed to:", goerliMons.address);
 }
-
 
 main()
   .then(() => process.exit(0))
@@ -17,3 +16,5 @@ main()
     console.error(error);
     process.exit(1);
   });
+
+//0xF9a04c183f965973A71F529AEbF1dEEbe36E4044

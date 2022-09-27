@@ -11,7 +11,7 @@ describe("NFT contract testing", function () {
     let ContractInstance;
 
     beforeEach("This block will run before each testing block", async () => {
-        ContractInstance = await ethers.getContractFactory('MyNFT');
+        ContractInstance = await ethers.getContractFactory('GMON');
         [owner, address_one, address_two, adderss_three, ...addresses] = await ethers.getSigners()
         NFTContract = await ContractInstance.deploy()
     })
@@ -19,6 +19,10 @@ describe("NFT contract testing", function () {
     describe("Contract Deployment", async () => {
         it("should declare the right owner of the contract", async () => {
             expect(await NFTContract.owner()).to.equal(owner.address)
+        })
+        it("should return the correct symbol and name of the NFT", async () => {
+            expect(await NFTContract.symbol()).to.equal('GMON')
+            expect(await NFTContract.name()).to.equal('GoerliMon')
         })
 
         it("should return the correct Token URI", async () => {
@@ -52,6 +56,7 @@ describe("NFT contract testing", function () {
             expect(await NFTContract.ownerOf(0)).to.equal(address_two.address)
         })
     })
+
 
     describe("Approvals", async () => {
         it("Approving activities should be working", async () => {
