@@ -10,7 +10,7 @@ const Minter = () => {
   const [count, setCount] = useState(null)
   const [loading, setLoading] = useState(true)
   const [NFTArray, setNFTArray] = useState([])
-  
+
   const monContractAddress = '0xF9a04c183f965973A71F529AEbF1dEEbe36E4044'
 
   const MonContractGetter = new ethers.Contract(monContractAddress, GoerliMons.abi, provider)
@@ -39,7 +39,7 @@ const Minter = () => {
         alert(error.message)
       }
     }
-    else{
+    else {
       setWalletError("Please connect the wallet first")
     }
   }
@@ -71,32 +71,32 @@ const Minter = () => {
     <>
       <div className="container">
         <div className="displayImg">
-        <p style={{fontSize : '35px'}}>Mint your friendly neibhourhood GOERLIMONS NOW!!</p>
-        <img src="https://i.ibb.co/Fn1V7rK/3.png" alt="3" border="0"/>
-        <img src="https://i.ibb.co/56pG3bk/6.png" alt="6" border="0"/>
-        <img src="https://i.ibb.co/3h000jQ/8.png" alt="8" border="0"/>
-        <img src="https://i.ibb.co/LNg1Vjz/13.png" alt="13" border="0"/>
-        <img src="https://i.ibb.co/M5MZV9G/16.png" alt="16" border="0"/>
-        <img src="https://i.ibb.co/wByRHKM/28.png" alt="28" border="0"/>
+          <p style={{ fontSize: '35px' }}>Mint your friendly neibhourhood GOERLIMONS NOW!!</p>
+          <img src="https://i.ibb.co/Fn1V7rK/3.png" alt="3" border="0" />
+          <img src="https://i.ibb.co/56pG3bk/6.png" alt="6" border="0" />
+          <img src="https://i.ibb.co/3h000jQ/8.png" alt="8" border="0" />
+          <img src="https://i.ibb.co/LNg1Vjz/13.png" alt="13" border="0" />
+          <img src="https://i.ibb.co/M5MZV9G/16.png" alt="16" border="0" />
+          <img src="https://i.ibb.co/wByRHKM/28.png" alt="28" border="0" />
         </div>
         <p>Address - {monContractAddress}</p>
-        
+
         <p></p>
 
         {window.ethereum && <button onClick={MintNFT} >
           MINT FOR 0.0001 <i className="fa-brands fa-ethereum"></i>
         </button>}
-        {walletError &&  <p style={{display: "inline-block", backgroundColor: "red", color:"white", borderRadius: "20px", marginTop:"10px"}}>{walletError}</p>}
+        {walletError && <p style={{ display: "inline-block", backgroundColor: "red", color: "white", borderRadius: "20px", marginTop: "10px" }}>{walletError}</p>}
         {!window.ethereum &&
-        <a href='https://metamask.io/download/' rel="noreferrer" target={"_blank"}>
-        <button> INSTALL METAMASK </button>
-        </a>}
+          <a href='https://metamask.io/download/' rel="noreferrer" target={"_blank"}>
+            <button> INSTALL METAMASK </button>
+          </a>}
         {count !== null && <p>Total NFTs Minted - {count}/40</p>}
       </div>
 
       <div className="container">
-        { window.ethereum && <p> List of GOERLIMONS minted with their owners. {loading ? "(loading...)" : ""} </p>}
-        {<div className="minted-items" onClick={() => {console.log(NFTArray)}}>
+        {window.ethereum && <p> List of GOERLIMONS minted with their owners. {loading ? "(loading...)" : ""} </p>}
+        {<div className="minted-items" onClick={() => { console.log(NFTArray) }}>
           {NFTArray.map((nft) => {
             return <MintedItems key={nft.id} props={nft} />
           })}
