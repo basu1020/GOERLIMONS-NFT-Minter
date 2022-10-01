@@ -59,12 +59,10 @@ const Minter = () => {
           sampleArray.push(obj);
         }
         setNFTArray(sampleArray)
-        console.log(NFTArray)
         setLoading(false)
       }
       func()
     }
-    // eslint-disable-next-line
   }, [count])
 
   return (
@@ -96,7 +94,7 @@ const Minter = () => {
 
       <div className="container">
         {window.ethereum && <p> List of GOERLIMONS minted with their owners. {loading ? "(loading...)" : ""} </p>}
-        {<div className="minted-items" onClick={() => { console.log(NFTArray) }}>
+        {<div className="minted-items">
           {NFTArray.map((nft) => {
             return <MintedItems key={nft.id} props={nft} />
           })}
