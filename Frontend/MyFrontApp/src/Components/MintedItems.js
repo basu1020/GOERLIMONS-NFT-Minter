@@ -9,7 +9,8 @@ const MintedItems = ({ props }) => {
           <img src={props.image} alt="" />
         </div>
         <div className="NFT-owner-address">
-          <p>{props.owner.slice(0, 20)}...</p>
+          <p>{props.owner}</p>
+          <p>id - {props.id}</p>
         </div>
       </div>
     </>
