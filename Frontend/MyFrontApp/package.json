@@ -11,6 +11,8 @@
     "ethers": "^5.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.3",
     "walletlink": "^2.5.0",

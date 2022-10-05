@@ -3,18 +3,24 @@ import { ethers } from 'ethers'
 import MintedItems from './MintedItems'
 import GoerliMons from '../GMON.json'
 import userContext from './Context/userContext'
+import LoaderLoader from './LoaderLoader'
 
 const Minter = () => {
   const context = useContext(userContext)
-  const { provider, signer, account, walletError, setWalletError } = context
+  const {
+    account,
+    walletError,
+    setWalletError,
+    MonContractSetter
+  } = context
   const [count, setCount] = useState(null)
   const [loading, setLoading] = useState(true)
   const [NFTArray, setNFTArray] = useState([])
 
   const monContractAddress = '0xF9a04c183f965973A71F529AEbF1dEEbe36E4044'
-
-  const MonContractGetter = new ethers.Contract(monContractAddress, GoerliMons.abi, provider)
-  const MonContractSetter = new ethers.Contract(monContractAddress, GoerliMons.abi, signer)
+  const INFURA_KEY_ID = 'a46c4873075d48ec92fe67b184a6fbdb'
+  const web3Provider = new ethers.providers.JsonRpcProvider(`https://goerli.infura.io/v3/${INFURA_KEY_ID}`)
+  const MonContractGetter = new ethers.Contract(monContractAddress, GoerliMons.abi, web3Provider)
 
   const getCount = async () => {
     const number = await MonContractGetter.getCurrentTokenID()
@@ -49,7 +55,7 @@ const Minter = () => {
       getCount()
       let sampleArray = []
       const func = async () => {
-        for (let i = 0; i < count; i++) {
+        for (let i = 1; i < count; i++) {
           let resOwner = await MonContractGetter.ownerOf(i);
           let obj = {
             id: i,
@@ -81,25 +87,38 @@ const Minter = () => {
 
         <p></p>
 
-        {window.ethereum && <button onClick={MintNFT} >
-          MINT FOR 0.0001 <i className="fa-brands fa-ethereum"></i>
-        </button>}
-        {walletError && <p style={{ display: "inline-block", backgroundColor: "red", color: "white", borderRadius: "20px", marginTop: "10px" }}>{walletError}</p>}
+        {window.ethereum &&
+          <button onClick={MintNFT} >
+            MINT FOR 0.0001 <i className="fa-brands fa-ethereum"></i>
+          </button>}
+
+        {walletError &&
+          <p style={{ display: "inline-block", backgroundColor: "red", color: "white", borderRadius: "20px", marginTop: "10px" }}>
+            {walletError}
+          </p>}
+
         {!window.ethereum &&
           <a href='https://metamask.io/download/' rel="noreferrer" target={"_blank"}>
             <button> INSTALL METAMASK </button>
           </a>}
-        {count !== null && <p>Total NFTs Minted - {count}/40</p>}
+        {count !== null && <p>Total NFTs Minted - {count - 1}/40</p>}
       </div>
 
       <div className="container">
-        {window.ethereum && <p> List of GOERLIMONS minted with their owners. {loading ? "(loading...)" : ""} </p>}
-        {<div className="minted-items">
+
+        {window.ethereum &&
+          <p>
+            List of GOERLIMONS minted with their owners. {loading === true ? "Please Wait" : ""}
+          </p>}
+
+        <div className="minted-items">
           {NFTArray.map((nft) => {
             return <MintedItems key={nft.id} props={nft} />
           })}
-        </div>}
-        {loading && <p>Loading .....</p>}
+        </div>
+        {!NFTArray.length > 0
+          &&
+          <LoaderLoader/>}
       </div>
     </>
   )
