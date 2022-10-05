@@ -42,7 +42,7 @@ const Minter = () => {
         await result.wait()
         getCount()
       } catch (error) {
-        alert(error.message)
+        console.log(error.message)
       }
     }
     else {

@@ -241,7 +241,7 @@ i{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .card {

@@ -45,10 +45,9 @@ const UserState = (props) => {
       cacheProvider: true, // very important
       network: "goerli",
       theme: {
-        background: "black",
+        background: "rgb(47, 46, 46)",
         main: "white",
         secondary: "white",
-        border: "#2bdfe2",
         hover: "#2bdfe2"
       },
       providerOptions,
