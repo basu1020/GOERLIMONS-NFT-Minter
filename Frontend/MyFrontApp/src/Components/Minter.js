@@ -34,7 +34,10 @@ const Minter = () => {
     const upcomingId = count
     const metadataURI = `${upcomingId}.json`
 
-    if (account) {
+    if (upcomingId > 40) {
+      setWalletError("Sorry All NFTs have been minted")
+    }
+    if (account && upcomingId < 40) {
       try {
         const result = await MonContractSetter.mint(metadataURI, {
           value: ethers.utils.parseEther('0.0001'),
