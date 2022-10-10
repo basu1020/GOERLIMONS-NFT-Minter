@@ -1,4 +1,4 @@
-Hello Everyone, This is my NFT minting dapp built on Ethereum Blockchain. 
+Hello Everyone, This is my NFT minting dapp built on Ethereum Blockchain. Here are steps involved to build it. 
 
 ![Screenshot (27)](https://user-images.githubusercontent.com/106004070/194912236-331916b7-1580-42fa-8589-7922b30e7b90.png)
 
@@ -18,13 +18,14 @@ Steps involved in this :-
  
 4 > Smart Contract - For this project I used Openzeppelin's ERC721 standard smart contract and added the CID of JSON metadata as my 'baseURI'.
 
-5 > Testing and Deploying the contract - I ran some important tests on my contract using Hardhat which is available in this repo and finally deployed it on GOERLI test network
+5 > Testing and Deploying the contract - I ran some important tests on my contract using Hardhat which is available in this repo and finally deployed it on GOERLI test network.
 
 6 > Frontend - By far the most popular frontend framework is ReactJS and I built my frontend using exactly that. 
 
 7 > Deploying on IPFS - We all have heard that IPFS is the future of internet, so I wanted to get my hands dirty on it. I used Fleek to deploy this website on IPFS, here's the link - https://fleek.co/
 
 ![Screenshot (32)](https://user-images.githubusercontent.com/106004070/194916229-9bad7b2e-e343-437d-befb-a085e46e9b89.png)
+
 
 
 
