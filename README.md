@@ -8,7 +8,7 @@ Steps involved in this :-
 
 ![Screenshot (33)](https://user-images.githubusercontent.com/106004070/194918381-71e93d1b-659d-49da-87e2-094a13fbe99a.png)
 
-2 > Generating NFTs and Metadata - I used hashlips generator for combining my components and creating PNG images and JSON files containing Metadata. 
+2 > Generating NFTs and Metadata - I used hashlips generator for combining my components and creating PNG images and JSON files containing Metadata. repo - https://github.com/HashLips/hashlips_art_engine
 
 ![Screenshot (34)](https://user-images.githubusercontent.com/106004070/194918434-fb26a46f-5196-47a1-a01f-0dcffa4fa7bb.png)
 
