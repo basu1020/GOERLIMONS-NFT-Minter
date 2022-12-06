@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+Hello Everyone, This is my NFT minting dapp built on Ethereum Blockchain. Here are steps involved to build it. 
+link - https://orange-truth-4802.on.fleek.co/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Screenshot (27)](https://user-images.githubusercontent.com/106004070/194912236-331916b7-1580-42fa-8589-7922b30e7b90.png)
 
-## Available Scripts
+Steps involved in this :-
 
-In the project directory, you can run:
+1 > Making Art - I designed the components such as Body, Eyes, Neckband, Background, Mouth using Inkscape. 
 
-### `npm start`
+![Screenshot (33)](https://user-images.githubusercontent.com/106004070/194918381-71e93d1b-659d-49da-87e2-094a13fbe99a.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2 > Generating NFTs and Metadata - I used hashlips generator for combining my components and creating PNG images and JSON files containing Metadata. repo - https://github.com/HashLips/hashlips_art_engine
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Screenshot (34)](https://user-images.githubusercontent.com/106004070/194918434-fb26a46f-5196-47a1-a01f-0dcffa4fa7bb.png)
 
-### `npm test`
+3 > Uploading PNGs and JSONs on IPFS - This is a cruical step as the CID (Content Identifier) will of the Metadata file with the link will be added as the 'baseURI' in    your ERC721 smart contract. There's two important things to note here :- 
+  * Uploadin the PNGs folder first 
+  * Then adding the CID of PNGs folder to the JSON metadata and finally uploading metadata folder
+ 
+4 > Smart Contract - For this project I used Openzeppelin's ERC721 standard smart contract and added the CID of JSON metadata as my 'baseURI'.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5 > Testing and Deploying the contract - I ran some important tests on my contract using Hardhat which is available in this repo and finally deployed it on GOERLI test network.
 
-### `npm run build`
+6 > Frontend - By far the most popular frontend framework is ReactJS and I built my frontend using exactly that. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+7 > Deploying on IPFS - We all have heard that IPFS is the future of internet, so I wanted to get my hands dirty on it. I used Fleek to deploy this website on IPFS, here's the link - https://fleek.co/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Screenshot (32)](https://user-images.githubusercontent.com/106004070/194916229-9bad7b2e-e343-437d-befb-a085e46e9b89.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
